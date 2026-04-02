@@ -13,7 +13,7 @@ A responsive front-end web application built using HTML, CSS, and JavaScript.
 https://gowthams28dev-lab.github.io/FORD-RELAUNCH-INDIA-WEB-PAGE/
 
 ## 📸 Preview
-(Add screenshot here)
+![Preview](screenshot.png)
 
 ## 🛠️ Tech Used
 HTML, CSS, JavaScript
