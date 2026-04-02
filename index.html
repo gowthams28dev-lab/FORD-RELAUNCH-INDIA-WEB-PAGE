@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Ford Relaunch Event</title>
+
+<style>
+body {
+    font-family: Arial;
+    text-align: center;
+    margin: 0;
+    color: white;
+    background-image:url(background.jpg.png);
+    
+               
+
+}
+
+/* Header */
+header {
+    padding: 30px;
+    font-size: 24px;
+}
+
+/* Countdown */
+.countdown {
+    margin: 20px;
+}
+
+/* Timer */
+#timer {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+#timer span {
+    display: inline-block;
+    min-width: 60px;
+    padding: 15px;
+    font-size: 22px;
+    font-weight: bold;
+    background: rgba(255,255,255,0.1);
+    border-radius: 10px;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 0 10px rgba(0,170,255,0.6);
+    animation: glow 2s infinite;
+}
+
+@keyframes glow {
+    0% { box-shadow: 0 0 5px #00aaff; }
+    50% { box-shadow: 0 0 20px #00aaff; }
+    100% { box-shadow: 0 0 5px #00aaff; }
+}
+
+/* Buttons */
+.buttons button {
+    margin: 10px;
+    padding: 12px 25px;
+    background: linear-gradient(45deg, #0056b3, #00aaff);
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 30px;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.buttons button:hover {
+    transform: scale(1.05);
+}
+
+/* Content */
+#content {
+    margin: 20px;
+    padding: 20px;
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    min-height: 120px;
+
+    margin-bottom: 120px; /* 🔥 FIX FOR FOOTER OVERLAP */
+}
+
+/* Popup */
+.popup {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.8);
+}
+
+.popup-content {
+    background: white;
+    color: black;
+    padding: 20px;
+    margin: 10% auto;
+    width: 300px;
+    border-radius: 10px;
+}
+
+.close {
+    float: right;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+input {
+    width: 90%;
+    padding: 8px;
+    margin: 5px;
+}
+
+/* Footer */
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    background: black;
+    color: white;
+    text-align: center;
+    line-height: 70px;
+    font-size: 13px;
+    z-index: 999;
+}
+</style>
+
+</head>
+
+<body>
+
+<header>
+    <h1>FORD INDIA RELAUNCH 2026</h1>
+    <p>Experience Innovation. Drive the Future.</p>
+</header>
+
+<!-- Countdown -->
+<section class="countdown">
+    <h2>Event Starts In:</h2>
+    <div id="timer">
+        <span id="days">0</span>
+        <span id="hours">0</span>
+        <span id="minutes">0</span>
+        <span id="seconds">0</span>
+    </div>
+</section>
+
+<!-- Buttons -->
+<section class="buttons">
+    <button onclick="showSection('models')">Models</button>
+    <button onclick="showSection('features')">Features</button>
+    <button onclick="showSection('booking')">Book Now</button>
+    <button onclick="showSection('testdrive')">Test Drive</button>
+</section>
+
+<!-- Content -->
+<section id="content">
+    <h2>Welcome to Ford Relaunch Event</h2>
+    <p>a journey starts with us</p>
+</section>
+
+<!-- Popup -->
+<div id="formPopup" class="popup">
+    <div class="popup-content">
+        <span class="close" onclick="closeForm()">&times;</span>
+        <h2 id="formTitle"></h2>
+        <form onsubmit="submitForm(event)">
+            <input type="text" placeholder="Your Name" required><br>
+            <input type="email" placeholder="Your Email" required><br>
+            <input type="tel" placeholder="Phone Number" required><br>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+    <p>© 2026 Ford India Relaunch | All Rights Reserved</p>
+</footer>
+
+<script>
+// Countdown
+let eventDate = new Date("April 30, 2026 10:00:00").getTime();
+
+function updateTimer() {
+    let now = new Date().getTime();
+    let gap = eventDate - now;
+
+    if (gap < 0) {
+        document.getElementById("timer").innerHTML = "Event Started!";
+        return;
+    }
+
+    let days = Math.floor(gap / (1000 * 60 * 60 * 24));
+    let hours = Math.floor((gap / (1000 * 60 * 60)) % 24);
+    let minutes = Math.floor((gap / (1000 * 60)) % 60);
+    let seconds = Math.floor((gap / 1000) % 60);
+
+    document.getElementById("days").innerText = days;
+    document.getElementById("hours").innerText = hours;
+    document.getElementById("minutes").innerText = minutes;
+    document.getElementById("seconds").innerText = seconds;
+}
+
+setInterval(updateTimer, 1000);
+updateTimer();
+
+// Content
+function showSection(section) {
+    let content = document.getElementById("content");
+
+    if (section === "models") {
+        content.innerHTML = `
+            <h2>Ford Models</h2>
+            <p>🚗 Mustang - Sports Performance</p>
+            <p>🚙 Endeavour - Premium SUV</p>
+            <p>🚘 EcoSport - Compact SUV</p>
+        `;
+    }
+
+    if (section === "features") {
+        content.innerHTML = `
+            <h2>Features</h2>
+            <p>✔ AI Driving Assist</p>
+            <p>✔ Smart Dashboard</p>
+            <p>✔ Hybrid Engine Technology</p>
+        `;
+    }
+
+    if (section === "booking") {
+        content.innerHTML = `
+            <h2>Book Your Car</h2>
+            <button onclick="openForm('Booking Form')">Open Booking Form</button>
+        `;
+    }
+
+    if (section === "testdrive") {
+        content.innerHTML = `
+            <h2>Test Drive</h2>
+            <button onclick="openForm('Test Drive Form')">Book Test Drive</button>
+        `;
+    }
+}
+
+// Forms
+function openForm(title) {
+    document.getElementById("formPopup").style.display = "block";
+    document.getElementById("formTitle").innerText = title;
+}
+
+function closeForm() {
+    document.getElementById("formPopup").style.display = "none";
+}
+
+function submitForm(event) {
+    event.preventDefault();
+    alert("Form Submitted Successfully!");
+    closeForm();
+}
+</script>
+
+</body>
+</html>
